@@ -1,11 +1,16 @@
+import logging
 from langchain_core.messages import AIMessage
 from state.state import CEOState
 from state.cleaning_report import CleaningReport
 from state.todo import TodoItem
 from typing import Any
 import pandas as pd
+    
 
 def cleaner_node(state: CEOState) -> dict[str, Any]:
+    logger = logging.getLogger(__name__)
+    
+    logger.info("Loading dataset...")
 
     df = pd.read_csv(state["dataset_path"])
 
@@ -50,6 +55,7 @@ def cleaner_node(state: CEOState) -> dict[str, Any]:
             )
         else:
             updated_tasks.append(task)
+    logger.info("Dataset cleaned successfully.")
 
     return {
         "todo_list": updated_tasks,

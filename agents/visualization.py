@@ -6,11 +6,13 @@ from state.todo import TodoItem
 from typing import Any
 from state.state import CEOState
 from state.visualization_report import VisualizationReport
+import logging
 output_dir = Path("outputs")
 
 output_dir.mkdir(exist_ok=True)
 
 def visualization_node(state: CEOState) -> dict[str, Any]:
+    logger = logging.getLogger(__name__)
 
     df = state["engineered_dataframe"].copy()
 
@@ -85,6 +87,7 @@ def visualization_node(state: CEOState) -> dict[str, Any]:
 
     charts.append(str(relationship_path.resolve()))
 
+    logger.info(f"Generated {len(charts)} visualizations.")
 
     report = VisualizationReport(
         charts_created=[

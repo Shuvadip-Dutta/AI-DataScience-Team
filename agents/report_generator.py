@@ -4,10 +4,12 @@ from state.todo import TodoItem
 from typing import Any
 from pathlib import Path
 from state.report_generator_report import ReportGeneratorReport
+import logging
 OUTPUT_DIR = Path("outputs")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 def report_generator_node(state: CEOState) -> dict[str, Any]:
+    logger = logging.getLogger(__name__)
 
     report_path = OUTPUT_DIR / "EDA_Report.md"
 
@@ -122,7 +124,7 @@ AI Data Science Team completed the workflow successfully.
 
     for task in state["todo_list"]:
 
-        if task.owner == "Report Generator":
+        if task.owner == "Report_Generator":
 
             updated_tasks.append(
                 TodoItem(
@@ -135,6 +137,7 @@ AI Data Science Team completed the workflow successfully.
         else:
 
             updated_tasks.append(task)
+    logger.info(f"EDA report saved to {report_path}")
 
     return {
 

@@ -25,7 +25,6 @@ def ceo_node(state: CEOState) -> dict[str, Any]:
         )
 
     else:
-
         # Find the first pending task
         pending_task = next(
             (task for task in todo_list if task.status == "Pending"),
@@ -40,7 +39,7 @@ def ceo_node(state: CEOState) -> dict[str, Any]:
             )
 
         else:
-            owner = pending_task.owner.strip().lower()
+            owner = pending_task.owner.strip().lower().replace("_", " ")
 
             agent = OWNER_TO_AGENT.get(owner)
 

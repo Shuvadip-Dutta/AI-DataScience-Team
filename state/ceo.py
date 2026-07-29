@@ -6,7 +6,6 @@ class CEODecision(BaseModel):
         "planner",
         "cleaner",
         "feature_engineer",
-        "model_builder",
         "evaluator",
         "visualization",
         "report_generator",

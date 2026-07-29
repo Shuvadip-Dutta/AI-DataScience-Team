@@ -4,8 +4,10 @@ from state.state import CEOState
 from state.todo import TodoItem
 from typing import Any
 from state.feature_engineering_report import FeatureEngineeringReport
+import logging
 
 def feature_engineer_node(state: CEOState)-> dict[str, Any]:
+    logger = logging.getLogger(__name__)
 
     df = state["dataframe"].copy()
 
@@ -45,8 +47,9 @@ def feature_engineer_node(state: CEOState)-> dict[str, Any]:
     updated_tasks = []
 
     for task in state["todo_list"]:
+        owner = task.owner.lower().replace("_", " ")
 
-        if task.owner == "Feature Engineer":
+        if task.owner == "Feature_Engineer":
 
             updated_tasks.append(
                 TodoItem(
@@ -59,6 +62,7 @@ def feature_engineer_node(state: CEOState)-> dict[str, Any]:
         else:
 
             updated_tasks.append(task)
+    logger.info("Feature engineering completed.")
 
     return {
         "engineered_dataframe": df,

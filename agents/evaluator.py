@@ -3,8 +3,10 @@ from state.state import CEOState
 from state.todo import TodoItem
 from typing import Any
 from state.evaluation_report import EvaluationReport
+import logging
 
 def evaluator_node(state: CEOState) -> dict[str, Any]:
+    logger = logging.getLogger(__name__)
 
     df = state.get("engineered_dataframe")
 
@@ -50,6 +52,7 @@ def evaluator_node(state: CEOState) -> dict[str, Any]:
         else:
 
             updated_tasks.append(task)
+    logger.info("Dataset evaluation completed.")
 
     return {
 
