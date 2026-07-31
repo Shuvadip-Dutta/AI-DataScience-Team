@@ -1,14 +1,14 @@
-from agents.ceo import ceo_node
+from app.agents.ceo import ceo_node
 from langgraph.graph import StateGraph, END, START
-from agents.planner import planner_node
-from agents.cleaner import cleaner_node
-from agents.feature_engineer import feature_engineer_node
-from agents.evaluator import evaluator_node
-from agents.visualization import visualization_node
-from agents.report_generator import report_generator_node
+from app.agents.planner import planner_node
+from app.agents.cleaner import cleaner_node
+from app.agents.feature_engineer import feature_engineer_node
+from app.agents.evaluator import evaluator_node
+from app.agents.visualization import visualization_node
+from app.agents.report_generator import report_generator_node
 from typing import Literal
 
-from state.state import CEOState
+from app.models.v1.state import CEOState
 
 builder = StateGraph(CEOState)
 # Register nodes
